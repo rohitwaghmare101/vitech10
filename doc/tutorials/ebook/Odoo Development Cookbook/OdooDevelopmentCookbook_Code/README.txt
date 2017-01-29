@@ -1,0 +1,1 @@
+Chapters 1, 2, and 3 covers mainly installation and command lines. They have been covered in the book.
