@@ -9,3 +9,4 @@ class LibraryMember(models.Model):
 	date_start = fields.Date(string='Member Since')
 	date_end = fields.Date(string='Termination Date')
 	member_number = fields.Char(string='Member number')
+	loan_duration = fields.Integer(string='Loan duration',default=15,required=True)

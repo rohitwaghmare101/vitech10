@@ -6,7 +6,7 @@ class ResPartner(models.Model):
 	_inherit = 'res.partner'
 	_order = 'name'
 
-	book_ids = fields.Many2many('library.book','publisher_id',string='Published Books')
+	#book_ids = fields.Many2many('library.book','publisher_id',string='Published Books')
 	authored_book_ids = fields.Many2many('library.book',string='Authored Book')
 	count_books = fields.Integer(string="Number of Authored Book",compute='_compute_count_book')
 

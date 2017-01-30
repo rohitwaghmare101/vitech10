@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from odoo import exceptions
 from odoo import models,fields
 from odoo.addons import decimal_precision as dp
 from datetime import timedelta,datetime
@@ -25,8 +26,9 @@ class LibraryBook(models.Model):
 	short_name = fields.Char(string='Short Title',size=100,translate=False)
 	notes = fields.Text(string="Internal Notes")
 	state = fields.Selection([
-		('draft','Not Available'),
+		('draft','Unavailable'),
 		('available','Available'),
+		('borrowed','Borrowed'),
 		('lost','Lost')
 	],string="State")
 	description=fields.Html(string="Description",sanitize=True,strip_style=False,translate=False)
@@ -45,6 +47,8 @@ class LibraryBook(models.Model):
 	publisher_city = fields.Char('Publisher City',related='publisher_id.city')
 	age_days = fields.Float(string='Days Since Release',compute='_compute_age',
 							search='_search_age',store=True,compute_sudo=False)
+	expected_return_date = fields.Date(string='Due for',required=False)
+	manager_remark = fields.Text(string='Manager Remark')
 
 	def name_get(self):
 		result = []
@@ -54,6 +58,15 @@ class LibraryBook(models.Model):
 				 u"%s (%s)" % (record.name, record.date_release)
 				 ))
 		return result
+
+	@api.model
+	def _name_search(self, name='', args=None, operator='ilike', limit=100, name_get_uid=None):
+		args = [] if args is None else args.copy()
+
+		if not (name == '' and operator == 'ilike'):
+			args += ['|', '|',('name', operator, name),('isbn', operator, name),('author_ids.name', operator, name)]
+
+		return super(LibraryBook, self)._name_search(name='', args=args, operator='ilike', limit=limit,name_get_uid=name_get_uid)
 
 	_sql_constraints = [
 		('name_uniq','UNIQUE (name)','Book Title must be unique.')
@@ -94,5 +107,58 @@ class LibraryBook(models.Model):
 	ref_doc_id = fields.Reference(
 		selection=_referencable_models,
 		string='Reference Document')
+
+	@api.model
+	def is_allowed_transition(self,old_state,new_state):
+		allowed = [('draf','available'),
+				   ('available','borrowed'),
+				   ('borrowed','available'),
+				   ('available','lost'),
+				   ('borrowed','lost'),
+				   ('lost','available')]
+		return (old_state,new_state) in allowed
+
+	@api.multi
+	def change_state(self,new_state):
+		for book in self:
+			if book._is_allowed_transition(book.state,new_state):
+				book.state = new_state
+			else:
+				continue # continue
+
+	@api.model
+	def _get_all_library_member(self):
+		library_member_model = self.env('library.member')
+		return library_member_model.search([])
+
+	@api.model
+	@api.returns('self', lambda rec: rec.id)
+	def create(self,values):
+		if not self.user_has_groups('library.group_library_manager'):
+			if 'manager_remarks' in values:
+				raise exceptions.UserError('You are not allowed to modify')
+
+		return super(LibraryBook, self).create(values)
+
+	@api.model
+	def write(self, values):
+		if not self.user_has_groups('library.group_library_manager'):
+			if 'manager_remarks' in values:
+				raise exceptions.UserError(
+					'You are not allowed to modify '
+					'manager_remarks'
+				)
+		return super(LibraryBook,self).write(values)
+
+	#deprecated with odoo 10
+	#@api.model
+	#def fields_get(self, allfields=None, attributes=None):
+		fields = super(LibraryBook, self).fields_get(allfields=allfields,attributes=attributes)
+
+		#if not self.user_has_groups('library.group_library_manager'):
+			#if 'manager_remarks' in fields:
+				#fields['manager_remarks']['readonly'] = True
+
+
 
 

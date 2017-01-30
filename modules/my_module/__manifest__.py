@@ -12,6 +12,7 @@
 		"base","decimal_precision"
 	],
 	'data':[
+		"security/ir.model.access.csv",
 		"views/library_book.xml",
 	],
 	'demo':[
