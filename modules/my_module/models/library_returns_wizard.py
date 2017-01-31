@@ -20,19 +20,6 @@ class LibraryReturnsWizard(models.TransientModel):
 			)
 			loans.write({'state' : 'done'})
 
-	"""
-	@api.onchange('member_id')
-	def onchange_member(self):
-		loan = self.env['library.book.loan']
-		loans = loan.search(
-			[
-				('state','=','ongoing'),
-				('member_id','=',self.member_id.id)
-			]
-		)
-		self.book_ids = loans.mapped('book_id')
-	"""
-
 	@api.onchange('member_id')
 	def onchange_member(self):
 		loan = self.env['library.book.loan']
