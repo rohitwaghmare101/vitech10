@@ -4,6 +4,7 @@
 		<act_window
 				id="library_book_action"
 				name="Library Books"
+                view_mode="kanban,form,tree"
 				res_model="library.book" />
 
 		<menuitem
@@ -13,19 +14,54 @@
 				parent=""
 				sequence="5" />
 
+        <record id="library_book_kanban" model="ir.ui.view">
+            <field name="name">Library Book</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card">
+                                <field name="name"/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
 		<record id="library_book_form" model="ir.ui.view">
 			<field name="name">Library Book Form</field>
 		  	<field name="model">library.book</field>
 		  	<field name="arch" type="xml">
 				<form>
-					<group>
-						<field name="name"/>
-						<field name="author_ids" widget="many2many_tags"/>
-				  	</group>
-				  	<group>
-						<field name="date_release"/>
-						<field name="age_days"/>
-				  	</group>
+					<header>
+						<button name="do_something_with_record"
+								string="Do something"
+								type="object"
+								class="oe_highlight"/>
+						<button name="do_something_else"
+								string="Second action"/>
+						<field name="state" widget="statusbar"/>
+
+					</header>
+                    <sheet>
+                        <div class="oe_left oe_title">
+                            <label for="name" />
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="author_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="date_release"/>
+                            <field name="age_days"/>
+                        </group>
+                    </sheet>
+
 				</form>
 		  	</field>
 		</record>

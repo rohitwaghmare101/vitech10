@@ -91,7 +91,7 @@
 			<field name="name">All Customer</field>
 			<field name="res_model">res.partner</field>
 			<field name="domain">[('customer','=',True)]</field>
-			<field name="saerch_view_id" ref="customer_search" />
+			<field name="search_view_id" ref="customer_search" />
 		</record>
 
 		<menuitem id="menu_custom_topleavel"

@@ -4,7 +4,8 @@ from datetime import date, timedelta
 
 class LibraryLoanWizard(models.TransientModel):
 	_name = 'library.loan.wizard'
-
+	date_start = fields.Date(string='Date Start')
+	date_end = fields.Date(string='Date End')
 	member_id =fields.Many2one(comodel_name='library.member',string='Member')
 	book_ids = fields.Many2many(comodel_name='library.book',string='Books')
 

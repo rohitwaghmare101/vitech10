@@ -6,7 +6,7 @@
 	'author' : "Suhendar",
 	'license':"AGPL-3",
 	'website':"vileo.co.id",
-	'category':"Uncategorized",
+	'category':"Library",
 	'version':"10.0.1.0.0",
 	'depends':[
 		"base","decimal_precision"
@@ -15,6 +15,9 @@
 		"security/ir.model.access.csv",
 		"views/library_book.xml",
 		"views/library_loan_wizard.xml",
+		"views/inherence.xml",
+        "security/library_security.xml",
+
 	],
 	'demo':[
 		#"demo.xml",

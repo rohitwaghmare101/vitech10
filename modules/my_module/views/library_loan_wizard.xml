@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
+
+		<record id="library_loan_wizard_calendar" model="ir.ui.view">
+            <field name="name">Library Loan Wizard Calendar</field>
+            <field name="model">library.loan.wizard</field>
+            <field name="arch" type="xml">
+                <calendar date_start="date_start" date_stop="date_end" color="member_id">
+                    <field name="member_id" />
+                </calendar>
+            </field>
+        </record>
+
 		<record id="library_loan_wizard_form" model="ir.ui.view">
 			<field name="name">Library Loan Wizard Form</field>
 			<field name="model">library.loan.wizard</field>
@@ -31,8 +42,7 @@
 		<act_window id="library_loan_wizard_act_window"
 					name="Record Loans"
 					res_model="library.loan.wizard"
-					view_mode="form"
-					target="new" />
+					view_mode="calendar,form"/>
 
 		<menuitem id="library_loan_wizard_menuitem"
 				  parent="library_book_menu"

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="base.main_company" model="res.company">
+            <field name="name">Packt Publishing</field>
+        </record>
+        <record id="book_cookbook" model="library.book">
+            <field name="publisher_id" ref="base.main_partner"></field>
+        </record>
+    </data>
+</odoo>
