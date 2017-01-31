@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="customer_form" model="ir.ui.view">
+			<field name="name">All customers</field>
+			<field name="model">res.partner</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button type="object"
+								name="open_commercial_entity"
+								string="Open Commercial Parner"
+								class="oe_highlight"/>
+					</header>
+					<group string="Content" name="my_content">
+						<field name="name"/>
+						<field name="category_id" widget="many2many_tags"/>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_all_customer_form" model="ir.action.act_window.view">
+			<field name="act_windows_id" ref="customer_act_window"/>
+			<field name="view_id" ref="customer_form"/>
+			<field name="view_mode">form</field>
+			<field name="sequence">10</field>
+		</record>
+
+		<act_window id="customer_act_window"
+					name="All customers"
+					res_model="res.partner"
+					view_mode="tree,form"
+					domain = "[('customer','=',True)]"
+					context="{'default_customer' : True}"
+					limit="80" />
+
+		<act_window id="action_all_customer_fr"
+					name="Tour les clients"
+					res_model="res.partner"
+					domain="[('customer','=',True)]"
+					context="{'lang' : 'fr_FR','default_lang':'fr_FR','active_test':False}" />
+
+		<record id="action_my_customers" model="ir.actions.act_window">
+			<field name="name">All customers who don't speak French</field>
+			<field name="res_model">res.partner</field>
+			<field name="domain">
+				[('customer','=',True),('user_id','=',uid),('lang','!=','fr_FR')]
+			</field>
+		</record>
+
+		<record id="action_customers_or_supplier" model="ir.actions.act_window">
+			<field name="name">Customers or suppliers</field>
+			<field name="res_model">res.partner</field>
+			<field name="domain">
+				[('customer','=',True),('supplier','=',True)]
+			</field>
+		</record>
+
+		<record id="customer_tree" model="ir.ui.view">
+			<field name="name">Customer List</field>
+			<field name="model">res.partner</field>
+			<field name="arch" type="xml">
+				<tree colors="blue:customer and supplier;green:customer;red:supplier">
+					<field name="name"/>
+					<field name="customer" invisible="1"/>
+					<field name="supplier" invisible="1"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_all_customer_tree" model="ir.actions.act_window.view">
+			<field name="act_window_id" ref="customer_act_window"/>
+			<field name="view_id" ref="customer_tree" />
+			<field name="sequence">5</field>
+		</record>
+
+		<record id="customer_search" model="ir.ui.view">
+			<field name="model">res.partner</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+					<field name="category_id" filter_domain="[('category_id','child_of',self)]"/>
+					<field name="bank_ids" widget="many2one" />
+					<filter name="supplers" string="Suppliers" domain="[('supplier','=',True)]" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_all_customer" model="ir.actions.act_window.view">
+			<field name="name">All Customer</field>
+			<field name="res_model">res.partner</field>
+			<field name="domain">[('customer','=',True)]</field>
+			<field name="saerch_view_id" ref="customer_search" />
+		</record>
+
+		<menuitem id="menu_custom_topleavel"
+				  name="My custome menu" />
+
+		<menuitem id="menu_custom_left"
+				  parent="menu_custom_topleavel"
+				  name="This will appear in the left bar"/>
+		<menuitem id="menu_all_customers"
+				  parent="menu_custom_left"
+				  action="customer_act_window"
+				  sequence="10"
+				  groups=""/>
+
+
+	</data>
+</odoo>
