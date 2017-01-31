@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="library_loan_wizard_form" model="ir.ui.view">
+			<field name="name">Library Loan Wizard Form</field>
+			<field name="model">library.loan.wizard</field>
+			<field name="arch" type="xml">
+				<form string="Borrow Books">
+					<sheet>
+						<group>
+							<field name='member_id'/>
+						</group>
+						<group>
+							<field name='book_ids'/>
+						</group>
+					</sheet>
+					<footer>
+						<button name='record_loans'
+								string='OK'
+								class='btn-primary'
+								type='object'/>
+
+						<button string='Cancel'
+								class='btn-default'
+								special='cancel'/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<act_window id="library_loan_wizard_act_window"
+					name="Record Loans"
+					res_model="library.loan.wizard"
+					view_mode="form"
+					target="new" />
+
+		<menuitem id="library_loan_wizard_menuitem"
+				  parent="library_book_menu"
+				  action="library_loan_wizard_act_window"
+				  sequence="20"/>
+	</data>
+</odoo>

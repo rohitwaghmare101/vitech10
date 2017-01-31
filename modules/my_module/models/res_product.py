@@ -2,7 +2,7 @@
 from odoo import models,api
 
 class ProductProduct(models.Model):
-	_inherit = 'product.product'
+	_name = 'product.product'
 
 	@api.model
 	def stock_in_location(self,location):

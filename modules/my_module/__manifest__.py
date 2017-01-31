@@ -14,6 +14,7 @@
 	'data':[
 		"security/ir.model.access.csv",
 		"views/library_book.xml",
+		"views/library_loan_wizard.xml",
 	],
 	'demo':[
 		#"demo.xml",
