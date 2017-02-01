@@ -21,7 +21,7 @@ class LibraryBook(models.Model):
 	_rec_name = 'short_name'
 
 	name = fields.Char(string='Title',required=True)
-	date_release = fields.Date(string='Release Date')
+	date_release = fields.Date(string='Release Date',groups='my_module.group_release_dates')
 	author_ids = fields.Many2many('res.partner',string='Author')
 	short_name = fields.Char(string='Short Title',size=100,translate=False)
 	notes = fields.Text(string="Internal Notes")

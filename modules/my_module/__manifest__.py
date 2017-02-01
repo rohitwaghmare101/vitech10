@@ -17,6 +17,7 @@
 		"views/library_loan_wizard.xml",
 		"views/inherence.xml",
         "security/library_security.xml",
+		#"views/res_config_settings.xml",
 
 	],
 	'demo':[

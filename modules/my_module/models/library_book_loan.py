@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import models,fields,api
 from datetime import date,timedelta
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 class LibraryBookLoan(models.Model):
 	_name = 'library.book.loan'
@@ -18,7 +17,7 @@ class LibraryBookLoan(models.Model):
 	duration = fields.Integer(string='Duration',default=15)
 	date_due = fields.Date(string='Due Date',compute='_compute_date_due',store=True)
 
-	@api.depends('start_date','due_date')
+	@api.depends('date','date_due')
 	def _compute_date_due(self):
 		res = {}
 		for loan in self:

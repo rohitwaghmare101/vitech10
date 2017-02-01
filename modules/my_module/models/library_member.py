@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import models,fields,api,exceptions
-from datetime import  date,timedelta
-from odoo.exceptions import UserError
-from odoo.tools import _ ,DEFAULT_SERVER_DATE_FORMAT
+from datetime import  date
 
 class LibraryMember(models.Model):
 	_name = 'library.member'
