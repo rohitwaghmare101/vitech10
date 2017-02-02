@@ -8,6 +8,10 @@
 	'depends' : [
 		'todo_app','mail'
 	],
+	'demo' : [
+		'data/todo.task.csv',
+		'data/todo.task.xml',
+	],
 	'data' : [
 		'security/todo_access_rules.xml',
 		'views/todo_task.xml',
