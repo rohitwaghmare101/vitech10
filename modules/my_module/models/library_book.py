@@ -15,7 +15,7 @@ class BaseArchive(models.AbstractModel):
 
 class LibraryBook(models.Model):
 	_name = 'library.book'
-	_inherit = ['base.archive']
+	_inherit = ['base.archive','mail.thread']
 	_description = 'Library Book'
 	_order = 'date_release desc,name asc'
 	_rec_name = 'short_name'
@@ -159,6 +159,9 @@ class LibraryBook(models.Model):
 			#if 'manager_remarks' in fields:
 				#fields['manager_remarks']['readonly'] = True
 
-
+	def _track_subtype(self,init_values):
+		if 'date_release' in init_values:
+			return 'mail.mt_comment'
+		return False
 
 

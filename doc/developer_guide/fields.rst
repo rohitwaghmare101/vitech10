@@ -194,7 +194,8 @@ class AModel(models.Model):
                                related='partner_id.name')	
 		
 		
-		
+	#add field
+
 
    
    

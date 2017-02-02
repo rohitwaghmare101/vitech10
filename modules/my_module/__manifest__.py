@@ -9,7 +9,7 @@
 	'category':"Library",
 	'version':"10.0.1.0.0",
 	'depends':[
-		"base","decimal_precision"
+		"base","decimal_precision","mail",
 	],
 	'data':[
 		"security/ir.model.access.csv",
