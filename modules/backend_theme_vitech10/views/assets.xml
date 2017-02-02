@@ -6,6 +6,9 @@
 				  inherit_id="web.assets_backend">
 			<xpath expr=".">
 				<link rel="stylesheet" href="/backend_theme_vitech10/static/src/less/bootswatch/variable.less" />
+				<link rel="stylesheet" href="/backend_theme_vitech10/static/src/css/style.css" />
+
+
 			</xpath>
 		</template>
 	</data>

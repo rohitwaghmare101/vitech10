@@ -151,7 +151,7 @@
                                 <span class="caret" />
                              </a>
                             <ul t-if="menu['children']"
-                                t-attf-class="dropdown-menu oe_secondary_submenu dropdown-scrollable"
+                                 t-attf-class="dropdown-menu oe_secondary_submenu dropdown-scrollable"
                                 >
                                 <t t-call="web.menu_secondary_submenu">
                                     <t t-set="submenu" t-value="True" />

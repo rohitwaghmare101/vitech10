@@ -1,21 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<data>
-		<template id="backend_theme_vitech10_webclient_bootstrap"
-				  inherit_id="web.webclient_bootstrap"
-				  name="App Drawer - Web Client">
-			<!-- Add Tag Head Information -->
-			<xpath expr="//t[@t-set='head']" position="inside">
-				<title>Vitech ERP</title>
-				<meta charset="utf-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-				<meta http-equiv="cleartype" content="on" />
-				<meta name="MobileOptimized" content="320" />
-            	<meta name="HandheldFriendly" content="True" />
-            	<meta name="apple-mobile-web-app-capable" content="yes" />
-			</xpath>
-			<!-- Add Tag Head Information -->
+    <data>
+        <template id="backend_theme_vitech10.webclient_bootstrap" inherit_id="web.webclient_bootstrap" name="App Drawer - Web Client">
+            <xpath expr="//div[@class='o_sub_menu']" position="replace" />
+            <xpath expr="//t[@t-set='head']" position="inside">
+                <meta charset="utf-8" />
+                <meta http-equiv="cleartype" content="on" />
+                <meta name="MobileOptimized" content="320" />
+                <meta name="HandheldFriendly" content="True" />
+                <meta name="apple-mobile-web-app-capable" content="yes" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+            </xpath>
 
-		</template>
-	</data>
+            <xpath expr="//nav[@id='oe_main_menu_navbar']" position="replace">
+                <nav id="oe_main_menu_navbar" class="navbar navbar-inverse" groups="base.group_user,base.group_portal">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                          </button>
+                          <a class="navbar-brand" href="#"></a>
+                        </div>
+
+                        <div class="navbar-collapse collapse " id="menu_item">
+                            <t t-call="backend_theme_vitech10.menu"/>
+                        </div>
+
+                    </div>
+                </nav>
+            </xpath>
+        </template>
+
+        <template id="backend_theme_vitech10.menu" inherit_id="web.menu">
+            <xpath expr="//ul[@class='nav navbar-nav navbar-left oe_application_menu_placeholder']" position="replace">
+                <ul class="nav navbar-nav">
+                    <li t-foreach="menu_data['children']" t-as="menu">
+                        <t t-call="backend_theme_vitech10.menu_link"/>
+                    </li>
+                    <li id="menu_more_container" class="dropdown" style="display: none;">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
+                        <ul id="menu_more" class="dropdown-menu"></ul>
+                    </li>
+                </ul>
+            </xpath>
+        </template>
+
+
+
+        <template id="menu_link" inherit_id="web.menu_link">
+            <xpath expr="//a" position="replace">
+                <t t-set="debug_param" t-value="'?&amp;debug=' if debug else ''"/>
+                <a t-att-href="'/web%s#menu_id=%s&amp;action=%s' % (debug_param, menu['id'], menu['action'] and menu['action'].split(',')[1] or '') if menu['action'] else '' "
+                   t-att-class="'dropdown-toggle' if menu.get('children') else ''"
+                   t-att-data-toggle="'dropdown' if menu.get('children') else ''"
+                   t-att-data-menu="menu['id']"
+                   t-att-data-menu-xmlid="menu.get('xmlid')"
+                   t-att-data-action-model="menu['action'] and menu['action'].split(',')[0] or None"
+                   t-att-data-action-id="menu['action'] and menu['action'].split(',')[1] or None">
+                    <t t-esc="menu['name']"/>
+                </a>
+            </xpath>
+        </template>
+
+
+    </data>
 </odoo>
