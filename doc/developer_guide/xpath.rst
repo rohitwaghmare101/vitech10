@@ -15,3 +15,10 @@ or with field
 <field name="is_done" position="before">
 	<field name="date_deadline"/>
 </field>
+
+
+#template example
+
+<xpath expr="//t[@t-set='head']" position="inside">
+				<meta charset="utf-8" />
+			</xpath>

@@ -19,7 +19,7 @@
         'web',
     ],
     "data": [
-        #'views/assets.xml',
-        #'views/web.xml',
+        'views/assets.xml',
+        'views/template.xml',
     ],
 }
