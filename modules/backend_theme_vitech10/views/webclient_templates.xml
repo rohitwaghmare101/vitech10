@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="assets_backend" inherit_id="web.assets_backend">
+			<xpath expr=".">
+				<link rel="stylesheet" href="/backend_theme_vitech10/static/src/less/bootswatch/variable.less" />
+				<link rel="stylesheet" type="text/css" href="/backend_theme_vitech10/static/src/css/style.css" />
+			</xpath>
+		</template>
+
+		<template id="webclient_bootstrap" inherit_id="web.webclient_bootstrap">
+			<xpath expr="//t[@t-set='head']" position="inside">
+                <meta charset="utf-8" />
+                <meta http-equiv="cleartype" content="on" />
+                <meta name="MobileOptimized" content="320" />
+                <meta name="HandheldFriendly" content="True" />
+                <meta name="apple-mobile-web-app-capable" content="yes" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+            </xpath>
+
+			<xpath expr="//nav[@id='oe_main_menu_navbar']" position="replace">
+				 <nav id="oe_main_menu_navbar" class="navbar navbar-inverse" groups="base.group_user,base.group_portal">
+					 <div class="container-fluid">
+						 <div class="navbar-header">
+							 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+							 	<span class="icon-bar"></span>
+        						<span class="icon-bar"></span>
+        						<span class="icon-bar"></span>
+							 </button>
+							 <a class="navbar-brand" href="#">Odoo</a>
+						 </div>
+
+						 <div class="collapse navbar-collapse" id="myNavbar">\
+							 <t t-call="backend_theme_vitech10.menu"/>
+						 </div>
+					 </div>
+				 </nav>
+			</xpath>
+		</template>
+
+		 <template id="menu" inherit_id="web.menu">
+			  <xpath expr="//ul[contains(@class, 'oe_application_menu_placeholder')]" position="replace">
+				  <ul class="nav navbar-nav navbar-left oe_application_menu_placeholder">
+					  <t t-foreach="menu_data['children']" t-as="menu">
+					  	<li t-att-class="'dropdown' if menu.get('children') else ''" t-att-data-menu-parent="menu['id']">
+							<t t-call="backend_theme_vitech10.menu_link"/>
+							<t t-if="menu_data['children']">
+								<t t-call="backend_theme_vitech10.subermenu"/>
+							</t>
+            			</li>
+					  </t>
+				  </ul>
+			 </xpath>
+		 </template>
+
+		 <template id="subermenu">
+			 <ul class="dropdown-menu" role="menu">
+				 <t t-foreach="menu['children']" t-as="menu">
+					 <li>
+						 <t t-if="menu.get('children')">
+							 <t t-call="backend_theme_vitech10.menu_link"/>
+							 <t t-call="backend_theme_vitech10.subermenu_item"/>
+						 </t>
+						 <t t-if="not menu.get('children')">
+							 <t t-call="backend_theme_vitech10.menu_link"/>
+						 </t>
+					 </li>
+				 </t>
+			 </ul>
+		 </template>
+
+		<template id="subermenu_item">
+			<ul class="dropdown-menu">
+				<li t-foreach="menu['children']" t-as="menu">
+					<t t-if="not menu.get('children')">
+						<t t-call="backend_theme_vitech10.menu_link"/>
+					</t>
+					<t t-if="menu.get('children')">
+						<t t-call="backend_theme_vitech10.subermenu_item"/>
+					</t>
+				</li>
+			</ul>
+    	</template>
+
+		 <template id="menu_link" inherit_id="web.menu_link">
+			 <xpath expr="//a" position="replace">
+				 <t t-if="menu.get('children')">
+					 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><t t-esc="menu['name']"/> <b class="caret"></b></a>
+				 </t>
+				  <t t-if="not menu.get('children')">
+					  <a t-att-href="'/web%s#menu_id=%s&amp;action=%s' % (debug_param, menu['id'], menu['action'] and menu['action'].split(',')[1] or '')"
+						 t-att-data-menu="menu['id']"
+						 t-att-data-menu-xmlid="menu.get('xmlid')"
+						 t-att-data-action-model="menu['action'] and menu['action'].split(',')[0] or None"
+						 t-att-data-action-id="menu['action'] and menu['action'].split(',')[1] or None">
+						  <t t-esc="menu['name']"/>
+					  </a>
+				  </t>
+			 </xpath>
+		 </template>
+
+	</data>
+</odoo>

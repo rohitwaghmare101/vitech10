@@ -102,6 +102,7 @@ class AModel(models.Model):
 	aselection = fields.Selection([('a', 'A')])
 	aselection = fields.Selection(selection=[('a', 'A')])
 	aselection = fields.Selection(selection='a_function_name')
+
 	
 	Specific options:
 
@@ -113,6 +114,10 @@ class AModel(models.Model):
 	class SomeModel(models.Model):
 		_inherits = 'some.model'
 		type = fields.Selection(selection_add=[('b', 'B'), ('c', 'C')])
+
+	#from selection Model (Database)
+	stage_state = fields.Selection(related='stage_id.state',string='Stage State')
+
 		
 	#Reference
 	#Store an arbitrary reference to a model and a row
