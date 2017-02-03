@@ -56,9 +56,9 @@
 		 <template id="subermenu">
 			 <ul class="dropdown-menu" role="menu">
 				 <t t-foreach="menu['children']" t-as="menu">
-					 <li>
+					 <li t-att-class="'dropdown-submenu' if menu.get('children') else '' ">
 						 <t t-if="menu.get('children')">
-							 <t t-call="backend_theme_vitech10.menu_link"/>
+							 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><t t-esc="menu['name']"/></a>
 							 <t t-call="backend_theme_vitech10.subermenu_item"/>
 						 </t>
 						 <t t-if="not menu.get('children')">
@@ -70,7 +70,7 @@
 		 </template>
 
 		<template id="subermenu_item">
-			<ul class="dropdown-menu">
+			<ul class="dropdown-menu" role="menu">
 				<li t-foreach="menu['children']" t-as="menu">
 					<t t-if="not menu.get('children')">
 						<t t-call="backend_theme_vitech10.menu_link"/>
