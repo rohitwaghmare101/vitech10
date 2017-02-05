@@ -2,7 +2,7 @@
 _build/
 
 # dotfiles
-#.*
+.*
 !.gitignore
 !.mailmap
 # compiled python files
@@ -32,4 +32,3 @@ install/win32/meta.py
 /man/
 /share/
 /src/
-/.idea

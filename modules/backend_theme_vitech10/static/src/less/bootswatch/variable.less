@@ -1,16 +1,76 @@
+//== Font Familly
+//## Font
+@font-family-base : "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-size-base: 13px;
 
 //== Colors
 //
 //## Gray and brand colors for use across Bootstrap.
-
-@brand-info : 1b92a0; // same color als primary
+@brand-default:	#AEA79F; // #999
+@brand-primary:	#1b92a0;
+@brand-success: #38B44A;
+@brand-info: #1b92a0; // same color als primary
+@brand-warning:#EFB73E;
+@brand-danger: #DF382C;
+@brand-info : #1b92a0; // same color als primary
 @color-white : #ffffff;
 
-//## background
-@bg-primary	 : #1b92a0;
+
+//** Global textual link color.
+@link-color:            @brand-primary
+@link-hover-color:      darken(@link-color, 15%);
+@link-hover-decoration: underline;
+
+//== Components
+@border-radius-base: 4px;
+@border-radius-large: 6px;
+@border-radius-small: 3px;
+
+//** Unit-less `line-height` for use in components like buttons.
+@line-height-base: 1.428571429; // 20/14
+@line-height-computed : floor((@font-size-base * @line-height-base)); // ~20px
+
+// Small screen / tablet
+@screen-sm:                  768px;
+@screen-sm-min:              @screen-sm;
+@screen-tablet:              @screen-sm-min;
+
+// Large screen / wide desktop
+@screen-lg:                  1200px;
+@screen-lg-min:              @screen-lg;
+@screen-lg-desktop:          @screen-lg-min;
+
+// So media queries don't overlap when required, provide a maximum
+@screen-xs-max:              (@screen-sm-min - 1);
+@screen-sm-max:              (@screen-md-min - 1);
+@screen-md-max:              (@screen-lg-min - 1);
+
+//== Grid system
+//## Define your custom responsive grid.
+@grid-columns:              12;
+@grid-gutter-width:         30px;
+@grid-float-breakpoint:     @screen-sm-min;
+@grid-float-breakpoint-max: (@grid-float-breakpoint - 1);
+
+// Basics of a navbar
+@navbar-height:50px;
+@navbar-collapse-max-height: 40px;
+@navbar-padding-horizontal:  floor((@grid-gutter-width / 2));
+@navbar-padding-vertical: ((@navbar-height - @line-height-computed) / 2);
+
+//=== Default navbar
+@navbar-default-bg: @brand-primary;
+@navbar-default-border: darken(@navbar-default-bg, 10%);
+
+//=== dafault Navbar links
+@navbar-default-link-color : @color-white;
+@navbar-default-link-hover-color: @color-white;
+@navbar-default-link-hover-bg : darken(@navbar-default-bg, 15%);
+@navbar-default-link-active-color: @color-white;
+@navbar-default-link-active-bg: darken(@navbar-default-bg, 10%);
 
 //=== Inverted navbar
-@navbar-inverse-bg : @bg-primary;
+@navbar-inverse-bg :@brand-primary;
 @navbar-inverse-border : darken(@navbar-inverse-bg, 10%);
 
 //=== Inverted navbar links
@@ -19,5 +79,25 @@
 
 
 //== Buttons
+@btn-default-color : @color-white;
+@btn-default-bg: @brand-default;
+@btn-default-border: @btn-default-bg;
+
 @btn-primary-color : @color-white;
-@btn-primary-bg : @bg-primary;
+@btn-primary-bg : @brand-primary;
+@btn-primary-border : darken(@btn-primary-bg,10%);
+
+//== Dropdowns
+@dropdown-bg : @color-white;
+@dropdown-border : rgba(0,0,0,.15);
+@dropdown-fallback-border: #ccc;
+
+
+// App Drawer / Icons
+@app-drawer-icon-size: 6em;
+@app-drawer-icon-margin:1em;
+@app-drawer-width:100%;
+@app-drawer-title-height: @navbar-height;
+@app-drawer-navbar-height: @navbar-height / 2;
+@app-drawer-navbar-padding-vertical: @navbar-padding-vertical / 2;
+@app-drawer-padding-horizontal: @navbar-padding-horizontal / 2;
