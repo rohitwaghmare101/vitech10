@@ -44,7 +44,6 @@
         src_model="todo.task"
         res_model="todo.wizard"
         view_mode="form"
-        target="new"
-        />
+        target="new"/>
 
 </odoo>
