@@ -9,6 +9,7 @@ class TodoTask(models.Model):
 	is_done = fields.Boolean(string='Done?')
 	active = fields.Boolean(string='Active?',default=True)
 
+
 	#action from ui button
 	@api.multi
 	def do_toggle_done(self):

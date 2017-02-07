@@ -13,9 +13,7 @@
     'version': '0.1',
     'depends': ['todo_user'],
     'data': [
-        # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
+        'views/todo_ui.xml',
     ],
     'demo': [
         'demo/demo.xml',

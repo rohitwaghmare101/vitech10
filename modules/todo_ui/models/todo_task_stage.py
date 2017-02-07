@@ -5,6 +5,8 @@ class TodoTaskStage(models.Model):
 	_name = 'todo.task.stage'
 	_description = 'To-do Stage'
 	_order ='sequence,name'
+	_rec_name = 'name'  # the default
+	_table_name = 'todo_task_stage'  # the default
 
 	name = fields.Char(string='Name',size=40,translate=True)
 	desc = fields.Text(string='Description')
