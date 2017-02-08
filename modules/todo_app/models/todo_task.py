@@ -22,3 +22,13 @@ class TodoTask(models.Model):
 		dones = self.search([('is_done','=',True)])
 		dones.write({'active' :False})
 		return True
+	
+	@api.model
+	def create(self, vals):
+		new_record = super(TodoTask,self).create(vals)
+		return new_record
+	
+	@api.multi
+	def write(self, vals):
+		super(TodoTask,self).write(vals)
+		return True
