@@ -12,9 +12,12 @@
     'version': '0.1',
     'depends': ['base'],
     'data': [
+        'views/todo_templates.xml'
     ],
-    # only loaded in demonstration mode
     'demo': [
         
     ],
+    'installable' : True,
+    'application' : False,
+    'auto_install': False
 }

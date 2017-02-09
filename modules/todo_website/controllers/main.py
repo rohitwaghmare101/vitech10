@@ -21,3 +21,10 @@ from odoo import http
 
 
 from odoo import http
+from odoo.http import request
+
+class Todo(http.Controller):
+	@http.route('/helloworld',auth='public')
+	def init(self):
+		#return ('<h1>Hello Word</h1>')
+		return request.render('todo_website.hello')
