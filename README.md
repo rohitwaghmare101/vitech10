@@ -22,7 +22,7 @@ The main Odoo Apps include an <a href="https://www.odoo.com/page/crm">Open Sourc
 <a href="https://www.odoo.com/#apps">...</a>
 
 Odoo Apps can be used as stand-alone applications, but they also integrate seamlessly so you get
-a full-featured <a href="https://www.odoo.com">Open Source ERP</a> when you install several Apps.
+A full-featured <a href="https://www.odoo.com">Open Source ERP</a> when you install several Apps.
 
 
 Getting started with Odoo
@@ -37,7 +37,7 @@ If you are a developer you may type the following command at your terminal:
 Then follow <a href="https://www.odoo.com/documentation/10.0/tutorials.html">the developer tutorials</a>
 
 
-For Odoo employees
+For Odoo Employees
 ------------------
 
 To add the odoo-dev remote use this command:
